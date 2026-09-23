@@ -141,6 +141,37 @@
   /* ---------- Pages ---------- */
   .page[hidden] { display: none; }
   .page.block { border-top: 0; }
+
+  /* ---------- Animations ---------- */
+  /* Actives seulement si le JavaScript tourne (classe .anim sur <html>) */
+  .anim .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .anim .reveal.in { opacity: 1; transform: none; }
+  .anim .page.entering { animation: page-in .45s cubic-bezier(.2, .7, .2, 1); }
+  @keyframes page-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* Titre : chaque ligne du nom monte depuis un masque */
+  .hero-name .line { display: block; overflow: hidden; padding-bottom: .06em; }
+  .hero-name .line > span { display: block; }
+  .anim .hero-name .line > span { transform: translateY(105%); transition: transform .9s cubic-bezier(.2, .8, .2, 1); transition-delay: var(--d, 0ms); }
+  .anim .hero-name.in .line > span { transform: none; }
+  .anim .hero-name.reveal { opacity: 1; transform: none; }
+
+  /* Panneau de supervision : chaque service est « vérifié » puis passe à OK */
+  .state.checking { color: var(--ink-3); background: var(--surface-2); }
+  .state.checking::after { content: ""; display: inline-block; width: 1ch; text-align: left; animation: dots 1s steps(4) infinite; }
+  @keyframes dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+  .state.flip { animation: flip .35s ease; }
+  @keyframes flip { from { transform: scale(.8); opacity: .3; } to { transform: none; opacity: 1; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim .reveal, .anim .hero-name .line > span { opacity: 1; transform: none; transition: none; }
+    .anim .page.entering { animation: none; }
+  }
   .pager { margin-top: clamp(40px, 6vw, 64px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .pager a { text-decoration: none; display: grid; gap: 2px; padding: 10px 0; }
   .pager a:last-child { text-align: right; margin-left: auto; }
@@ -513,7 +544,7 @@
     <div class="wrap">
       <div>
         <p class="eyebrow">BTS SIO option SISR · En alternance</p>
-        <h1 class="hero-name">Tom <span class="last">Torres</span></h1>
+        <h1 class="hero-name"><span class="line"><span>Tom</span></span><span class="line last"><span style="--d: 120ms">Torres</span></span></h1>
         <p class="hero-role">Technicien support informatique, futur administrateur systèmes et réseaux.</p>
         <p class="hero-sub">Étudiant au CFA UTEC de Melun et alternant au service informatique de l'Agglomération Melun Val de Seine. Je diagnostique, je dépanne et j'améliore les environnements informatiques pour que les utilisateurs puissent travailler sans y penser.</p>
         <div class="ctas">
@@ -621,9 +652,9 @@
           <h3>Communauté d'Agglomération Melun Val de Seine</h3>
           <p>Créée en 2002 autour de Melun, l'agglomération coordonne les projets et services du territoire : développement économique, mobilités, environnement, habitat, culture et sport.</p>
           <div class="figures">
-            <div><b>20</b><span>communes adhérentes au service informatique</span></div>
-            <div><b>~140 000</b><span>habitants sur le territoire</span></div>
-            <div><b>153 km²</b><span>en Seine-et-Marne</span></div>
+            <div><b data-count="20">20</b><span>communes adhérentes au service informatique</span></div>
+            <div><b data-count="140000" data-prefix="~">~140 000</b><span>habitants sur le territoire</span></div>
+            <div><b data-count="153" data-suffix=" km²">153 km²</b><span>en Seine-et-Marne</span></div>
           </div>
         </div>
         <div class="missions">
@@ -866,6 +897,85 @@
 
 <script>
   (function () {
+    // ---------- Animations ----------
+    // Les éléments apparaissent au fur et à mesure qu'ils entrent à l'écran.
+    var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canAnimate = !calm && 'IntersectionObserver' in window;
+    if (canAnimate) document.documentElement.classList.add('anim');
+
+    var TARGETS = [
+      '.hero .eyebrow', '.hero-name', '.hero-role', '.hero-sub', '.ctas', '.panel', '.shortcut',
+      '.sec-head', '.prose > p', '.side > div', '.org-card', '.mission', '.filters', '.proj',
+      '.skill', '.tools', '.timeline > li', '.why', '.certs > *', '.contact', '.pager'
+    ].join(',');
+
+    var io = canAnimate ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        en.target.classList.add('in');
+        if (en.target.querySelector('[data-count]')) countUp(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }) : null;
+
+    // Une fois apparu, l'élément retrouve ses propres effets de survol
+    document.addEventListener('transitionend', function (e) {
+      var el = e.target;
+      if (e.propertyName === 'opacity' && el.classList.contains('in') && !el.classList.contains('hero-name')) {
+        el.classList.remove('reveal', 'in');
+        el.style.removeProperty('--d');
+      }
+    });
+
+    function prime(page) {
+      if (!canAnimate) return;
+      var els = Array.prototype.slice.call(page.querySelectorAll(TARGETS));
+      els.forEach(function (el) {
+        // Décalage en cascade entre éléments frères (ex. cartes d'une grille)
+        var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.matches(TARGETS); });
+        var i = Math.min(sibs.indexOf(el), 6);
+        el.style.setProperty('--d', (i * 90) + 'ms');
+        el.classList.remove('in');
+        el.classList.add('reveal');
+        io.observe(el);
+      });
+      page.classList.remove('entering');
+      void page.offsetWidth;
+      page.classList.add('entering');
+    }
+
+    function countUp(scope) {
+      scope.querySelectorAll('[data-count]').forEach(function (b) {
+        var end = +b.dataset.count, pre = b.dataset.prefix || '', suf = b.dataset.suffix || '';
+        var t0 = null, dur = 1200;
+        function step(t) {
+          if (t0 === null) t0 = t;
+          var k = Math.min((t - t0) / dur, 1);
+          var v = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          b.textContent = pre + v.toLocaleString('fr-FR') + suf;
+          if (k < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    // Panneau de supervision : les services sont « vérifiés » un par un
+    var checked = false;
+    function checkServices() {
+      if (checked || !canAnimate) return;
+      checked = true;
+      var states = document.querySelectorAll('.svc .state');
+      states.forEach(function (s, i) {
+        var label = s.textContent, cls = s.className;
+        s.textContent = '';
+        s.className = 'state checking';
+        setTimeout(function () {
+          s.textContent = label;
+          s.className = cls + ' flip';
+        }, 900 + i * 380);
+      });
+    }
+
     // Pages : une seule section visible à la fois, choisie par l'ancre (#projets, #contact…)
     var nav = document.getElementById('nav');
     var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
@@ -896,6 +1006,8 @@
       });
       var cur = pages[ids.indexOf(id)];
       document.title = id === 'accueil' ? 'Tom Torres Portfolio' : cur.dataset.title + ' · Tom Torres';
+      prime(cur);
+      if (id === 'accueil') checkServices();
       // Le navigateur saute à l'ancre : on revient en haut de la page affichée
       var top = function () { window.scrollTo({ top: 0, behavior: 'instant' }); };
       top(); setTimeout(top, 0);
@@ -914,7 +1026,18 @@
       f.querySelector('.n').textContent = n;
       f.addEventListener('click', function () {
         filters.forEach(function (o) { o.setAttribute('aria-pressed', o === f ? 'true' : 'false'); });
-        cards.forEach(function (c) { c.hidden = key !== 'all' && c.dataset.cat.split(' ').indexOf(key) === -1; });
+        var shown = 0;
+        cards.forEach(function (c) {
+          c.hidden = key !== 'all' && c.dataset.cat.split(' ').indexOf(key) === -1;
+          if (!c.hidden && canAnimate) {
+            // Les cartes affichées réapparaissent en cascade
+            c.style.setProperty('--d', (Math.min(shown++, 6) * 70) + 'ms');
+            c.classList.remove('in');
+            c.classList.add('reveal');
+            void c.offsetWidth;
+            c.classList.add('in');
+          }
+        });
       });
     });
 

@@ -480,7 +480,7 @@
   .steps li::before { content: "0" counter(step); font-family: var(--f-mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; }
   .steps b { font-size: 17px; }
   .steps span { color: var(--ink-2); font-size: 15px; }
-  .themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 48px); }
+  .themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 48px); }
   .theme { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 12px; align-content: start; }
   .theme h3 { font-stretch: 108%; font-weight: 800; font-size: 21px; }
   .theme p { color: var(--ink-2); font-size: 15px; }
@@ -503,7 +503,8 @@
   .feed .src { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
   .feed-empty { padding: 20px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-2); }
   @media (max-width: 860px) { .sources, .steps { grid-template-columns: 1fr; } }
-  @media (max-width: 640px) { .themes { grid-template-columns: 1fr; } .feed li { grid-template-columns: 1fr; } .feed .meta { grid-auto-flow: column; justify-content: start; gap: 10px; } }
+  @media (max-width: 960px) { .themes { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .feed li { grid-template-columns: 1fr; } .feed .meta { grid-auto-flow: column; justify-content: start; gap: 10px; } }
 
   /* Contact */
   .contact {
@@ -906,11 +907,11 @@
       <div class="sec-head">
         <p class="eyebrow">Veille technologique</p>
         <h2 class="sec-title">Ce que je surveille, et comment</h2>
-        <p class="sec-lead">Je suis deux sujets qui touchent directement mon métier : l'intelligence artificielle et l'administration système. Voici ma méthode, mes sources et les articles que j'ai retenus.</p>
+        <p class="sec-lead">Je suis trois sujets qui touchent directement mon métier : l'intelligence artificielle, l'administration système et la cybersécurité. Voici ma méthode, mes sources et les articles que j'ai retenus.</p>
       </div>
 
       <ol class="steps">
-        <li><b>Collecter</b><span>Les flux RSS de mes sources arrivent dans Feedly, rangés dans deux dossiers : « IA » et « Administration système ».</span></li>
+        <li><b>Collecter</b><span>Les flux RSS de mes sources arrivent dans Feedly, rangés dans trois dossiers : « IA », « Administration système » et « Cybersécurité ».</span></li>
         <li><b>Filtrer</b><span>Des mots-clés font remonter les articles utiles pour mon travail et écartent le reste.</span></li>
         <li><b>Retenir</b><span>Je lis, je sélectionne les articles importants et je les publie ici avec un court résumé.</span></li>
       </ol>
@@ -924,7 +925,12 @@
         <div class="theme">
           <h3>Administration système</h3>
           <p>Les outils et les menaces évoluent vite : mises à jour Windows, failles critiques, bonnes pratiques de sécurisation. C'est mon quotidien en alternance.</p>
-          <ul class="chips"><li>Windows Server</li><li>Active Directory</li><li>GPO</li><li>Linux</li><li>Proxmox</li><li>supervision</li><li>MFA</li><li>vulnérabilité</li></ul>
+          <ul class="chips"><li>Windows Server</li><li>Active Directory</li><li>GPO</li><li>Linux</li><li>Proxmox</li><li>supervision</li><li>mises à jour Windows</li></ul>
+        </div>
+        <div class="theme">
+          <h3>Cybersécurité</h3>
+          <p>Chaque faille non corrigée est une porte d'entrée. Suivre les alertes et les attaques récentes m'aide à protéger le parc, et c'est le domaine vers lequel je veux évoluer.</p>
+          <ul class="chips"><li>vulnérabilité</li><li>CVE</li><li>ransomware</li><li>phishing</li><li>MFA</li><li>alertes CERT-FR</li></ul>
         </div>
       </div>
 
@@ -938,7 +944,7 @@
           <span class="rss">https://www.it-connect.fr/feed/</span>
         </div>
         <div class="source">
-          <p class="eyebrow">Sécurité des systèmes</p>
+          <p class="eyebrow">Cybersécurité</p>
           <h4>CERT-FR (ANSSI)</h4>
           <p>Alertes et avis officiels de l'État sur les vulnérabilités à corriger en priorité. Indispensable pour planifier les mises à jour.</p>
           <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener">cert.ssi.gouv.fr ↗</a>
@@ -958,18 +964,19 @@
         <button class="filter" type="button" data-feed="all" aria-pressed="true">Tous</button>
         <button class="filter" type="button" data-feed="ia" aria-pressed="false">Intelligence artificielle</button>
         <button class="filter" type="button" data-feed="admin" aria-pressed="false">Administration système</button>
+        <button class="filter" type="button" data-feed="cyber" aria-pressed="false">Cybersécurité</button>
       </div>
       <ul class="feed" id="feed"></ul>
       <p class="feed-empty" id="feed-empty" hidden>Aucun article retenu pour l'instant sur ce thème.</p>
     </div>
   </section>
 
-  <!-- Articles de veille validés par Tom. Ajouter une entrée : date (AAAA-MM-JJ), theme ("ia" ou "admin"), source, title, url, note. -->
+  <!-- Articles de veille validés par Tom. Ajouter une entrée : date (AAAA-MM-JJ), theme ("ia", "admin" ou "cyber"), source, title, url, note. -->
   <script type="application/json" id="veille-data">
 [
   {
     "date": "2026-09-22",
-    "theme": "admin",
+    "theme": "cyber",
     "source": "IT-Connect",
     "title": "Ransomware PAYLOAD : les pirates ont paralysé une entreprise avec deux GPO, sans chiffrer un seul fichier",
     "url": "https://www.it-connect.fr/ransomware-payload-gpo-active-directory-sans-chiffrement/",
@@ -1173,7 +1180,7 @@
     var articles = [];
     try { articles = JSON.parse(document.getElementById('veille-data').textContent) || []; } catch (e) { articles = []; }
     articles.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
-    var THEMES = { ia: 'IA', admin: 'Admin système' };
+    var THEMES = { ia: 'IA', admin: 'Admin système', cyber: 'Cybersécurité' };
     function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
     function fmt(d) {
       var p = String(d).split('-');

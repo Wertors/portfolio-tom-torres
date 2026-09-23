@@ -474,6 +474,37 @@
   .why b { color: var(--ink); display: block; margin-bottom: 4px; }
   @media (max-width: 860px) { .path { grid-template-columns: 1fr; } }
 
+  /* Veille */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: step; }
+  .steps li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 14px; display: grid; gap: 6px; align-content: start; }
+  .steps li::before { content: "0" counter(step); font-family: var(--f-mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; }
+  .steps b { font-size: 17px; }
+  .steps span { color: var(--ink-2); font-size: 15px; }
+  .themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 48px); }
+  .theme { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 12px; align-content: start; }
+  .theme h3 { font-stretch: 108%; font-weight: 800; font-size: 21px; }
+  .theme p { color: var(--ink-2); font-size: 15px; }
+  .theme .chips li { font-family: var(--f-mono); font-size: 12.5px; padding: 3px 10px; background: var(--bg); }
+  .sub-title { font-family: var(--f-display); font-stretch: 110%; font-weight: 800; font-size: clamp(22px, 2.8vw, 28px); margin: clamp(40px, 6vw, 64px) 0 16px; }
+  .sources { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .source { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .source h4 { margin: 0; font-size: 17px; font-weight: 600; }
+  .source p { color: var(--ink-2); font-size: 14.5px; }
+  .source .rss { margin-top: auto; font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); word-break: break-all; padding: 8px 10px; background: var(--surface-2); border-radius: 6px; user-select: all; }
+  .source a { font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .source a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .feed { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .feed li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 6px 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .feed .meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); display: grid; gap: 4px; align-content: start; }
+  .feed .tag { justify-self: start; padding: 1px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+  .feed a { font-weight: 600; font-size: 17px; text-decoration: none; line-height: 1.35; }
+  .feed a:hover { color: var(--accent); }
+  .feed p { color: var(--ink-2); font-size: 15px; margin-top: 4px; max-width: 70ch; }
+  .feed .src { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+  .feed-empty { padding: 20px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-2); }
+  @media (max-width: 860px) { .sources, .steps { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .themes { grid-template-columns: 1fr; } .feed li { grid-template-columns: 1fr; } .feed .meta { grid-auto-flow: column; justify-content: start; gap: 10px; } }
+
   /* Contact */
   .contact {
     background: var(--ink);
@@ -533,6 +564,7 @@
       <a href="#projets">Projets</a>
       <a href="#competences">Compétences</a>
       <a href="#parcours">Parcours</a>
+      <a href="#veille">Veille techno</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -869,6 +901,74 @@
     </div>
   </section>
 
+  <section class="block page" id="veille" data-title="Veille techno">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Veille technologique</p>
+        <h2 class="sec-title">Ce que je surveille, et comment</h2>
+        <p class="sec-lead">Je suis deux sujets qui touchent directement mon métier : l'intelligence artificielle et l'administration système. Voici ma méthode, mes sources et les articles que j'ai retenus.</p>
+      </div>
+
+      <ol class="steps">
+        <li><b>Collecter</b><span>Les flux RSS de mes sources arrivent dans Feedly, rangés dans deux dossiers : « IA » et « Administration système ».</span></li>
+        <li><b>Filtrer</b><span>Des mots-clés font remonter les articles utiles pour mon travail et écartent le reste.</span></li>
+        <li><b>Retenir</b><span>Je lis, je sélectionne les articles importants et je les publie ici avec un court résumé.</span></li>
+      </ol>
+
+      <div class="themes">
+        <div class="theme">
+          <h3>Intelligence artificielle</h3>
+          <p>L'IA change le support informatique : assistants de niveau 1, automatisation des tickets, mais aussi de nouveaux risques de sécurité. Je l'ai expérimenté avec mon chatbot Léo.</p>
+          <ul class="chips"><li>IA générative</li><li>LLM</li><li>agents IA</li><li>RAG</li><li>Ollama</li><li>IA et cybersécurité</li></ul>
+        </div>
+        <div class="theme">
+          <h3>Administration système</h3>
+          <p>Les outils et les menaces évoluent vite : mises à jour Windows, failles critiques, bonnes pratiques de sécurisation. C'est mon quotidien en alternance.</p>
+          <ul class="chips"><li>Windows Server</li><li>Active Directory</li><li>GPO</li><li>Linux</li><li>Proxmox</li><li>supervision</li><li>MFA</li><li>vulnérabilité</li></ul>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Mes 3 sources</h3>
+      <div class="sources">
+        <div class="source">
+          <p class="eyebrow">Administration système</p>
+          <h4>IT-Connect</h4>
+          <p>Site français de référence pour les administrateurs : actualités, tutoriels Windows Server, Linux, Proxmox et sécurité.</p>
+          <a href="https://www.it-connect.fr/" target="_blank" rel="noopener">it-connect.fr ↗</a>
+          <span class="rss">https://www.it-connect.fr/feed/</span>
+        </div>
+        <div class="source">
+          <p class="eyebrow">Sécurité des systèmes</p>
+          <h4>CERT-FR (ANSSI)</h4>
+          <p>Alertes et avis officiels de l'État sur les vulnérabilités à corriger en priorité. Indispensable pour planifier les mises à jour.</p>
+          <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener">cert.ssi.gouv.fr ↗</a>
+          <span class="rss">https://www.cert.ssi.gouv.fr/feed/</span>
+        </div>
+        <div class="source">
+          <p class="eyebrow">Intelligence artificielle</p>
+          <h4>ActuIA</h4>
+          <p>Média français dédié à l'IA : nouveaux modèles, usages en entreprise, recherche et enjeux de sécurité.</p>
+          <a href="https://www.actuia.com/" target="_blank" rel="noopener">actuia.com ↗</a>
+          <span class="rss">https://www.actuia.com/feed/</span>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Articles retenus</h3>
+      <div class="filters" role="group" aria-label="Filtrer les articles">
+        <button class="filter" type="button" data-feed="all" aria-pressed="true">Tous</button>
+        <button class="filter" type="button" data-feed="ia" aria-pressed="false">Intelligence artificielle</button>
+        <button class="filter" type="button" data-feed="admin" aria-pressed="false">Administration système</button>
+      </div>
+      <ul class="feed" id="feed"></ul>
+      <p class="feed-empty" id="feed-empty" hidden>Aucun article retenu pour l'instant sur ce thème.</p>
+    </div>
+  </section>
+
+  <!-- Articles de veille validés par Tom. Ajouter une entrée : date (AAAA-MM-JJ), theme ("ia" ou "admin"), source, title, url, note. -->
+  <script type="application/json" id="veille-data">
+[]
+  </script>
+
   <section class="block page" id="contact" data-title="Contact">
     <div class="wrap">
       <div class="contact">
@@ -906,7 +1006,8 @@
     var TARGETS = [
       '.hero .eyebrow', '.hero-name', '.hero-role', '.hero-sub', '.ctas', '.panel', '.shortcut',
       '.sec-head', '.prose > p', '.side > div', '.org-card', '.mission', '.filters', '.proj',
-      '.skill', '.tools', '.timeline > li', '.why', '.certs > *', '.contact', '.pager'
+      '.skill', '.tools', '.timeline > li', '.why', '.certs > *', '.contact', '.pager',
+      '.steps > li', '.theme', '.sub-title', '.source', '.feed > li'
     ].join(',');
 
     var io = canAnimate ? new IntersectionObserver(function (entries) {
@@ -1019,7 +1120,7 @@
 
     // Filtre des projets
     var cards = Array.prototype.slice.call(document.querySelectorAll('.proj'));
-    var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+    var filters = Array.prototype.slice.call(document.querySelectorAll('#projets .filter'));
     filters.forEach(function (f) {
       var key = f.dataset.filter;
       var n = key === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat.split(' ').indexOf(key) !== -1; }).length;
@@ -1038,6 +1139,39 @@
             c.classList.add('in');
           }
         });
+      });
+    });
+
+    // Veille : articles validés, lus depuis le bloc JSON « veille-data »
+    var feed = document.getElementById('feed');
+    var feedEmpty = document.getElementById('feed-empty');
+    var articles = [];
+    try { articles = JSON.parse(document.getElementById('veille-data').textContent) || []; } catch (e) { articles = []; }
+    articles.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    var THEMES = { ia: 'IA', admin: 'Admin système' };
+    function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+    function fmt(d) {
+      var p = String(d).split('-');
+      var m = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'][+p[1] - 1];
+      return (+p[2]) + ' ' + m + ' ' + p[0];
+    }
+    function renderFeed(key) {
+      var list = articles.filter(function (a) { return key === 'all' || a.theme === key; });
+      feed.innerHTML = list.map(function (a) {
+        return '<li><div class="meta"><span>' + esc(fmt(a.date)) + '</span><span class="tag">' + esc(THEMES[a.theme] || a.theme) + '</span></div>' +
+          '<div><a href="' + esc(a.url) + '" target="_blank" rel="noopener">' + esc(a.title) + '</a>' +
+          (a.note ? '<p>' + esc(a.note) + '</p>' : '') +
+          '<div class="src">' + esc(a.source) + '</div></div></li>';
+      }).join('');
+      feedEmpty.textContent = articles.length ? 'Aucun article retenu pour l\'instant sur ce thème.' : 'Les premiers articles retenus arrivent très bientôt.';
+      feedEmpty.hidden = list.length > 0;
+    }
+    renderFeed('all');
+    var feedFilters = Array.prototype.slice.call(document.querySelectorAll('#veille .filter'));
+    feedFilters.forEach(function (f) {
+      f.addEventListener('click', function () {
+        feedFilters.forEach(function (o) { o.setAttribute('aria-pressed', o === f ? 'true' : 'false'); });
+        renderFeed(f.dataset.feed);
       });
     });
 

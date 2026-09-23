@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tom Torres Portfolio</title>
+<meta name="description" content="Portfolio de Tom Torres, étudiant en BTS SIO option SISR en alternance, futur administrateur systèmes et réseaux.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --bg: #EDF0F4;
+    --surface: #FFFFFF;
+    --surface-2: #E2E7EE;
+    --ink: #101A25;
+    --ink-2: #4A586A;
+    --ink-3: #6C7A8C;
+    --line: #D0D8E2;
+    --accent: #2447D6;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #DCE3FF;
+    --ok: #1C8A4B;
+    --ok-soft: #DDF3E6;
+    --pending: #A86A12;
+    --pending-soft: #FBEBD2;
+    --shadow: 0 1px 2px rgba(16, 26, 37, .06), 0 8px 24px -12px rgba(16, 26, 37, .18);
+
+    --f-display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+    --wrap: 1120px;
+    --gutter: clamp(16px, 4vw, 40px);
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0B1118;
+      --surface: #121B26;
+      --surface-2: #1A2533;
+      --ink: #E4EBF3;
+      --ink-2: #A3B1C2;
+      --ink-3: #7D8C9F;
+      --line: #243244;
+      --accent: #8AA4FF;
+      --accent-ink: #0B1118;
+      --accent-soft: #1C2A50;
+      --ok: #52C483;
+      --ok-soft: #133224;
+      --pending: #E6B062;
+      --pending-soft: #3A2C14;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px -14px rgba(0, 0, 0, .6);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0B1118;
+    --surface: #121B26;
+    --surface-2: #1A2533;
+    --ink: #E4EBF3;
+    --ink-2: #A3B1C2;
+    --ink-3: #7D8C9F;
+    --line: #243244;
+    --accent: #8AA4FF;
+    --accent-ink: #0B1118;
+    --accent-soft: #1C2A50;
+    --ok: #52C483;
+    --ok-soft: #133224;
+    --pending: #E6B062;
+    --pending-soft: #3A2C14;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px -14px rgba(0, 0, 0, .6);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+  h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .mono { font-family: var(--f-mono); }
+
+  /* ---------- Header ---------- */
+  .top {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; }
+  .brand {
+    font-family: var(--f-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: .02em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .brand span { color: var(--accent); }
+  .nav { display: flex; gap: 4px; align-items: center; }
+  .nav a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: color .15s, background .15s;
+  }
+  .nav a:hover { color: var(--ink); background: var(--surface-2); }
+  .nav a.is-active { color: var(--accent-ink); background: var(--accent); }
+  @media (max-width: 900px) {
+    .top .wrap { flex-direction: column; align-items: flex-start; gap: 6px; padding-block: 10px; }
+    .nav { flex-wrap: wrap; gap: 4px; margin-left: -10px; }
+    .nav a { padding: 5px 10px; font-size: 13.5px; }
+  }
+
+  /* ---------- Pages ---------- */
+  .page[hidden] { display: none; }
+  .page.block { border-top: 0; }
+  .pager { margin-top: clamp(40px, 6vw, 64px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .pager a { text-decoration: none; display: grid; gap: 2px; padding: 10px 0; }
+  .pager a:last-child { text-align: right; margin-left: auto; }
+  .pager small { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .pager b { font-family: var(--f-display); font-stretch: 112%; font-weight: 800; font-size: 20px; }
+  .pager a:hover b { color: var(--accent); }
+
+  /* Accueil : raccourcis */
+  .shortcuts { padding-block: 0 clamp(56px, 8vw, 96px); }
+  .shortcuts .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .shortcut {
+    display: grid; gap: 8px; align-content: start;
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color .15s, transform .15s;
+  }
+  .shortcut:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .shortcut b { font-family: var(--f-display); font-stretch: 110%; font-weight: 800; font-size: 20px; }
+  .shortcut span { font-size: 15px; color: var(--ink-2); }
+  .shortcut .go { font-size: 14px; font-weight: 600; color: var(--accent); margin-top: 4px; }
+  @media (max-width: 760px) { .shortcuts .grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(48px, 9vw, 104px) clamp(48px, 7vw, 80px); }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: end; }
+  .hero-name {
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(44px, 8.4vw, 104px);
+    line-height: .9;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+    margin-top: 18px;
+  }
+  .hero-name .last { color: var(--accent); display: block; }
+  .hero-role {
+    margin-top: 24px;
+    font-size: clamp(18px, 2.1vw, 22px);
+    line-height: 1.45;
+    max-width: 30ch;
+    font-weight: 500;
+  }
+  .hero-sub { margin-top: 12px; color: var(--ink-2); max-width: 52ch; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 600 15px var(--f-body);
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform .15s, border-color .15s, background .15s;
+  }
+  .btn:hover { border-color: var(--ink-3); transform: translateY(-1px); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+
+  /* Supervision panel */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .panel-head .host { color: var(--ink); font-weight: 500; }
+  .avatar {
+    display: flex; gap: 14px; align-items: center;
+    padding: 18px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .avatar-img {
+    width: 56px; height: 56px; flex: none;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--f-display); font-stretch: 125%; font-weight: 800; font-size: 18px;
+  }
+  .avatar strong { display: block; font-size: 16px; }
+  .avatar span { font-size: 14px; color: var(--ink-2); }
+  .svc { list-style: none; margin: 0; padding: 0; }
+  .svc li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .svc li:last-child { border-bottom: 0; }
+  .svc .state {
+    grid-row: span 2;
+    align-self: start;
+    margin-top: 2px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    min-width: 64px;
+    text-align: center;
+  }
+  .state.ok { color: var(--ok); background: var(--ok-soft); }
+  .state.pending { color: var(--pending); background: var(--pending-soft); }
+  .svc .name { font-weight: 600; font-size: 15px; }
+  .svc .detail { font-size: 14px; color: var(--ink-2); }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; align-items: start; }
+  }
+
+  /* ---------- Sections ---------- */
+  section.block { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); scroll-margin-top: 60px; }
+  .sec-head { display: grid; gap: 10px; margin-bottom: clamp(28px, 4vw, 44px); max-width: 62ch; }
+  .sec-title {
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(30px, 4.4vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+  }
+  .sec-lead { color: var(--ink-2); font-size: 17px; }
+
+  /* About */
+  .about { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); }
+  .prose { display: grid; gap: 16px; font-size: 17px; max-width: 62ch; }
+  .prose strong { font-weight: 600; }
+  .side { display: grid; gap: 28px; align-content: start; }
+  .side h3 { font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+  .chips li {
+    font-size: 14px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .interests { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .interests li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; font-size: 15px; }
+  .interests b { font-weight: 600; }
+  .interests span { color: var(--ink-2); }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+  /* Alternance */
+  .org {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: clamp(28px, 5vw, 64px);
+  }
+  .org-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: grid; gap: 18px; align-content: start;
+  }
+  .org-card h3 { font-stretch: 110%; font-weight: 800; font-size: 22px; line-height: 1.2; }
+  .org-card p { color: var(--ink-2); font-size: 15px; }
+  .figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .figures div { display: grid; gap: 2px; }
+  .figures b { font-family: var(--f-display); font-stretch: 112%; font-weight: 800; font-size: 26px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .figures span { font-size: 13px; color: var(--ink-2); line-height: 1.35; }
+  .role { font-family: var(--f-mono); font-size: 13px; color: var(--accent); }
+  .missions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .mission {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+    background: var(--bg);
+  }
+  .mission h4 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+  .mission ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14.5px; color: var(--ink-2); }
+  .mission ul li::marker { color: var(--accent); }
+  @media (max-width: 900px) { .org { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .missions { grid-template-columns: 1fr; } .figures b { font-size: 22px; } }
+
+  /* Projects */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .filter {
+    font: 500 14px var(--f-body);
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .filter:hover { color: var(--ink); border-color: var(--ink-3); }
+  .filter[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .filter .n { font-family: var(--f-mono); font-size: 12px; opacity: .7; margin-left: 4px; }
+  .projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; grid-auto-flow: dense; }
+  .proj {
+    display: flex; flex-direction: column; gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color .15s, transform .15s;
+  }
+  .proj:hover { border-color: var(--ink-3); }
+  .proj.featured { grid-column: span 2; box-shadow: var(--shadow); }
+  .proj-meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .ctx { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .ctx.alt { color: var(--accent); }
+  .proj h3 { font-stretch: 108%; font-weight: 800; font-size: 21px; line-height: 1.2; }
+  .proj.featured h3 { font-size: clamp(24px, 3vw, 30px); }
+  .proj p { font-size: 15px; color: var(--ink-2); }
+  .proj.featured p { font-size: 16px; max-width: 60ch; }
+  .points { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 20px; font-size: 14px; }
+  .points li { padding-left: 16px; position: relative; }
+  .points li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; margin-top: auto; }
+  .stack li { font-family: var(--f-mono); font-size: 12px; padding: 3px 8px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); }
+  .proj-links { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .proj-links a { font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+  .proj-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .proj-links .none { font-size: 14px; color: var(--ink-3); }
+  .proj[hidden] { display: none; }
+  @media (max-width: 960px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) {
+    .projects { grid-template-columns: 1fr; }
+    .proj.featured { grid-column: auto; }
+    .points { grid-template-columns: 1fr; }
+  }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .skill {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: grid; gap: 12px; align-content: start;
+  }
+  .skill h3 { font-family: var(--f-body); font-weight: 600; font-size: 17px; }
+  .skill ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+  .skill li { padding: 9px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 12px; }
+  .skill li code { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-3); white-space: nowrap; }
+  .tools { margin-top: 28px; display: grid; gap: 12px; }
+  @media (max-width: 720px) { .skills { grid-template-columns: 1fr; } .skill li { flex-wrap: wrap; } }
+
+  /* Timeline */
+  .path { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); }
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+  .timeline li { position: relative; padding-left: 40px; padding-bottom: 32px; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before {
+    content: ""; position: absolute; left: 0; top: 6px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--ink-3);
+  }
+  .timeline li.now::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+  .timeline li.next::before { border-style: dashed; border-color: var(--accent); }
+  .timeline .when { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .timeline li.now .when { color: var(--accent); }
+  .timeline h3 { font-family: var(--f-body); font-weight: 600; font-size: 18px; margin-top: 4px; }
+  .timeline p { color: var(--ink-2); font-size: 15px; margin-top: 4px; max-width: 52ch; }
+  .certs { display: grid; gap: 12px; align-content: start; }
+  .cert {
+    display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .cert-mark {
+    width: 44px; height: 44px; border-radius: 8px;
+    display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent);
+    font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: .04em;
+  }
+  .cert b { display: block; font-size: 15px; }
+  .cert span { font-size: 14px; color: var(--ink-2); }
+  .why {
+    margin-top: 28px;
+    padding: 20px;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .why b { color: var(--ink); display: block; margin-bottom: 4px; }
+  @media (max-width: 860px) { .path { grid-template-columns: 1fr; } }
+
+  /* Contact */
+  .contact {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 14px;
+    padding: clamp(28px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 56px);
+    align-items: start;
+  }
+  .contact .eyebrow { color: color-mix(in srgb, var(--bg) 60%, var(--ink)); }
+  .contact h2 { font-stretch: 118%; font-weight: 900; font-size: clamp(32px, 5vw, 56px); line-height: 1; text-transform: uppercase; margin-top: 12px; }
+  .contact p { margin-top: 16px; color: color-mix(in srgb, var(--bg) 78%, var(--ink)); max-width: 44ch; }
+  .lines { display: grid; gap: 0; list-style: none; margin: 0; padding: 0; }
+  .lines li {
+    display: grid; grid-template-columns: 90px 1fr auto; gap: 12px; align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--bg) 18%, var(--ink));
+  }
+  .lines li:first-child { border-top: 1px solid color-mix(in srgb, var(--bg) 18%, var(--ink)); }
+  .lines .k { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: color-mix(in srgb, var(--bg) 55%, var(--ink)); }
+  .lines .v { font-size: 16px; font-weight: 500; word-break: break-word; user-select: all; }
+  .lines a.v { text-decoration: none; user-select: auto; }
+  .lines a.v:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .copy {
+    font: 500 13px var(--f-body);
+    color: var(--bg);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--bg) 35%, var(--ink));
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .copy:hover { border-color: var(--bg); }
+  .contact :focus-visible { outline-color: var(--bg); }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .lines li { grid-template-columns: 1fr auto; } .lines .k { grid-column: 1 / -1; } }
+
+  footer { padding-block: 32px 40px; color: var(--ink-3); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+</style>
+<style>
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil">Tom <span>Torres</span></a>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a>
+      <a href="#a-propos">À propos</a>
+      <a href="#alternance">Alternance</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page" id="accueil" data-title="Accueil">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">BTS SIO option SISR · En alternance</p>
+        <h1 class="hero-name">Tom <span class="last">Torres</span></h1>
+        <p class="hero-role">Technicien support informatique, futur administrateur systèmes et réseaux.</p>
+        <p class="hero-sub">Étudiant au CFA UTEC de Melun et alternant au service informatique de l'Agglomération Melun Val de Seine. Je diagnostique, je dépanne et j'améliore les environnements informatiques pour que les utilisateurs puissent travailler sans y penser.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#projets">Voir mes projets</a>
+          <a class="btn" href="https://www.canva.com/design/DAFb55bWnHo/UN3xWqMpBT8k5Qi75quQFg/edit" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9 1.5V5.5h4"/><path d="M6.5 9h4M6.5 11.5h4"/></svg>
+            Mon CV
+          </a>
+          <a class="btn" href="https://github.com/Wertors" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Résumé de mon profil">
+        <div class="panel-head">
+          <span class="host">tom-torres</span>
+          <span>4 services · 3 OK · 1 en cours</span>
+        </div>
+        <div class="avatar">
+          <div class="avatar-img" aria-hidden="true">TT</div>
+          <div>
+            <strong>Tom Torres</strong>
+            <span>Melun, Seine-et-Marne</span>
+          </div>
+        </div>
+        <ul class="svc">
+          <li><span class="state ok">OK</span><span class="name">Formation</span><span class="detail">BTS SIO option SISR, CFA UTEC de Melun</span></li>
+          <li><span class="state ok">OK</span><span class="name">Alternance</span><span class="detail">Support informatique, Agglomération Melun Val de Seine</span></li>
+          <li><span class="state ok">OK</span><span class="name">Certifications</span><span class="detail">SecNumAcadémie (ANSSI), PIX, RGPD</span></li>
+          <li><span class="state pending">EN COURS</span><span class="name">Objectif</span><span class="detail">Master en alternance, orienté cybersécurité</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <section class="shortcuts" aria-label="Accès rapide">
+    <div class="wrap grid">
+      <a class="shortcut" href="#projets">
+        <b>Projets</b>
+        <span>PerfLens, le chatbot Léo, le MFA YubiKey et 5 autres réalisations.</span>
+        <span class="go">Voir les projets →</span>
+      </a>
+      <a class="shortcut" href="#alternance">
+        <b>Alternance</b>
+        <span>Mes missions au service informatique de l'Agglomération Melun Val de Seine.</span>
+        <span class="go">Voir l'alternance →</span>
+      </a>
+      <a class="shortcut" href="#parcours">
+        <b>Parcours et certifications</b>
+        <span>Du Bac Pro Commerce au BTS SIO, avec SecNumAcadémie, PIX et RGPD.</span>
+        <span class="go">Voir le parcours →</span>
+      </a>
+    </div>
+  </section>
+  </div>
+
+  <section class="block page" id="a-propos" data-title="À propos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">À propos</p>
+        <h2 class="sec-title">Du premier PC monté à Noël au support d'une agglomération</h2>
+      </div>
+      <div class="about">
+        <div class="prose">
+          <p>Je m'appelle <strong>Tom Torres</strong> et je prépare un <strong>BTS SIO option SISR</strong> (solutions d'infrastructure, systèmes et réseaux) au CFA UTEC de Melun, en alternance.</p>
+          <p>Au sein du service informatique de l'<strong>Agglomération Melun Val de Seine</strong>, je traite les tickets, j'accompagne les utilisateurs et je veille au bon fonctionnement du parc. Ces missions m'ont appris à dépanner avec méthode, à gérer les incidents et à expliquer simplement un problème technique.</p>
+          <p>Je m'intéresse de plus en plus à la <strong>cybersécurité</strong>, un domaine dans lequel je veux évoluer. Sérieux, à l'écoute et courtois, je cherche toujours la solution adaptée au besoin de l'utilisateur, tout en continuant à apprendre chaque jour.</p>
+        </div>
+        <div class="side">
+          <div>
+            <h3>Savoir-être</h3>
+            <ul class="chips">
+              <li>Sérieux</li>
+              <li>À l'écoute</li>
+              <li>Courtois</li>
+              <li>Méthodique</li>
+              <li>Esprit d'équipe</li>
+              <li>Curieux</li>
+            </ul>
+          </div>
+          <div>
+            <h3>En dehors de l'informatique</h3>
+            <ul class="interests">
+              <li><b>Sport</b><span>La rigueur et l'esprit d'équipe</span></li>
+              <li><b>Jeux vidéo</b><span>Ce qui m'a amené au matériel</span></li>
+              <li><b>Montage PC</b><span>Choisir, assembler et optimiser des configurations</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block page" id="alternance" data-title="Alternance">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Alternance</p>
+        <h2 class="sec-title">Technicien support à l'Agglomération Melun Val de Seine</h2>
+        <p class="sec-lead">Le service informatique de l'agglomération gère les postes, la téléphonie et les réseaux des communes qui y adhèrent. J'y interviens au quotidien, du ticket jusqu'au déploiement.</p>
+      </div>
+      <div class="org">
+        <div class="org-card">
+          <p class="role">Alternant support informatique</p>
+          <h3>Communauté d'Agglomération Melun Val de Seine</h3>
+          <p>Créée en 2002 autour de Melun, l'agglomération coordonne les projets et services du territoire : développement économique, mobilités, environnement, habitat, culture et sport.</p>
+          <div class="figures">
+            <div><b>20</b><span>communes adhérentes au service informatique</span></div>
+            <div><b>~140 000</b><span>habitants sur le territoire</span></div>
+            <div><b>153 km²</b><span>en Seine-et-Marne</span></div>
+          </div>
+        </div>
+        <div class="missions">
+          <div class="mission">
+            <h4>Support et mise à disposition</h4>
+            <ul>
+              <li>Résolution d'incidents matériels et logiciels</li>
+              <li>Déploiement de postes et téléphones à partir d'un master</li>
+              <li>Traitement des tickets à distance</li>
+            </ul>
+          </div>
+          <div class="mission">
+            <h4>Systèmes et réseaux</h4>
+            <ul>
+              <li>Adressage IP, DHCP et gestion des imprimantes</li>
+              <li>Supervision avec CheckMK, déploiement avec WAPT</li>
+              <li>Inventaire du parc téléphonique</li>
+            </ul>
+          </div>
+          <div class="mission">
+            <h4>Cybersécurité</h4>
+            <ul>
+              <li>Déploiement de l'authentification MFA par clés YubiKey</li>
+              <li>Application des mises à jour de sécurité Windows</li>
+            </ul>
+          </div>
+          <div class="mission">
+            <h4>Relation utilisateur</h4>
+            <ul>
+              <li>Rendez-vous et accompagnement des agents</li>
+              <li>Accueil téléphonique et suivi des demandes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block page" id="projets" data-title="Projets">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Projets</p>
+        <h2 class="sec-title">Ce que j'ai construit et déployé</h2>
+        <p class="sec-lead">Des projets personnels, des projets de cours et des chantiers menés en alternance.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filtrer les projets">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">Tous<span class="n"></span></button>
+        <button class="filter" type="button" data-filter="dev" aria-pressed="false">Développement<span class="n"></span></button>
+        <button class="filter" type="button" data-filter="infra" aria-pressed="false">Systèmes et réseaux<span class="n"></span></button>
+        <button class="filter" type="button" data-filter="web" aria-pressed="false">Web<span class="n"></span></button>
+      </div>
+
+      <div class="projects" id="projects">
+        <article class="proj featured" data-cat="dev">
+          <div class="proj-meta"><span class="ctx">Projet personnel</span></div>
+          <h3>PerfLens</h3>
+          <p>Application Windows de diagnostic et de benchmark, entièrement en français. Elle indique si un PC tourne comme il le devrait au vu de ses composants, et explique ce qui le limite.</p>
+          <ul class="points">
+            <li>Détection du matériel : CPU, GPU, RAM, stockage, carte mère</li>
+            <li>Benchmarks CPU, GPU (Direct3D 11), mémoire et disque</li>
+            <li>Diagnostic en trois niveaux avec pistes de solution</li>
+            <li>Surveillance en temps réel et test de stabilité</li>
+            <li>Installeur autonome et mises à jour automatiques</li>
+            <li>Aucune donnée envoyée : tout reste sur le PC</li>
+          </ul>
+          <ul class="stack"><li>C#</li><li>.NET</li><li>Direct3D 11</li><li>Windows 10/11</li></ul>
+          <div class="proj-links"><a href="https://github.com/Wertors/PerfLens" target="_blank" rel="noopener">Voir sur GitHub ↗</a></div>
+        </article>
+
+        <article class="proj" data-cat="dev">
+          <div class="proj-meta"><span class="ctx">Projet personnel</span></div>
+          <h3>Léo, chatbot de support N1</h3>
+          <p>Assistant de support niveau 1 qui suit la gestion des incidents ITIL. Il répond à partir d'une base de connaissances (RAG) et réutilise les incidents déjà résolus. Il tourne en local, sans clé d'API.</p>
+          <ul class="stack"><li>Python</li><li>FastAPI</li><li>Ollama</li><li>RAG</li><li>ITIL</li></ul>
+          <div class="proj-links"><a href="https://github.com/Wertors/ai_test" target="_blank" rel="noopener">Voir sur GitHub ↗</a></div>
+        </article>
+
+        <article class="proj" data-cat="dev web">
+          <div class="proj-meta"><span class="ctx">Projet personnel</span></div>
+          <h3>Entraînement BTS SISR</h3>
+          <p>Site de révision pour préparer les épreuves du BTS SIO option SISR, avec un back-end en Python.</p>
+          <ul class="stack"><li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <div class="proj-links"><span class="none">Dépôt privé</span></div>
+        </article>
+
+        <article class="proj" data-cat="infra">
+          <div class="proj-meta"><span class="ctx alt">Alternance</span></div>
+          <h3>MFA par clés YubiKey</h3>
+          <p>Participation au déploiement de l'authentification multifacteur auprès des agents : préparation des clés, enrôlement et accompagnement des utilisateurs.</p>
+          <ul class="stack"><li>MFA</li><li>YubiKey</li><li>Cybersécurité</li></ul>
+          <div class="proj-links"><span class="none">Projet interne</span></div>
+        </article>
+
+        <article class="proj" data-cat="infra">
+          <div class="proj-meta"><span class="ctx alt">Alternance</span></div>
+          <h3>Supervision et déploiement du parc</h3>
+          <p>Suivi de l'état des équipements dans CheckMK, déploiement de logiciels et de correctifs de sécurité Windows avec WAPT, déploiement de postes à partir d'un master.</p>
+          <ul class="stack"><li>CheckMK</li><li>WAPT</li><li>Windows</li></ul>
+          <div class="proj-links"><span class="none">Projet interne</span></div>
+        </article>
+
+        <article class="proj" data-cat="infra">
+          <div class="proj-meta"><span class="ctx">Projet de cours</span></div>
+          <h3>Administration Linux</h3>
+          <p>Travaux pratiques sur des machines virtuelles Ubuntu : administration en ligne de commande et automatisation de tâches avec des scripts Bash.</p>
+          <ul class="stack"><li>Ubuntu</li><li>Bash</li><li>Virtualisation</li></ul>
+          <div class="proj-links"><span class="none">Projet de cours</span></div>
+        </article>
+
+        <article class="proj" data-cat="web">
+          <div class="proj-meta"><span class="ctx">Projet de cours</span></div>
+          <h3>Site vitrine ICEF</h3>
+          <p>Site vitrine pour l'ICEF de Fontainebleau, conçu pour présenter et mettre en vente les produits du lycée.</p>
+          <ul class="stack"><li>Wix</li><li>Web</li></ul>
+          <div class="proj-links"><a href="https://icefsitevitrine.wixsite.com/icef-fontainebleau" target="_blank" rel="noopener">Voir le site ↗</a></div>
+        </article>
+
+        <article class="proj" data-cat="web">
+          <div class="proj-meta"><span class="ctx">Projet de cours</span></div>
+          <h3>Questionnaire de satisfaction ICEF</h3>
+          <p>Questionnaire conçu et réalisé seul pour recueillir l'avis des visiteurs du site ICEF.</p>
+          <ul class="stack"><li>Google Forms</li></ul>
+          <div class="proj-links"><a href="https://forms.gle/grpEi18JVkCjxh7EA" target="_blank" rel="noopener">Voir le questionnaire ↗</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block page" id="competences" data-title="Compétences">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Compétences</p>
+        <h2 class="sec-title">Ce que je sais faire, et où je l'ai pratiqué</h2>
+      </div>
+      <div class="skills">
+        <div class="skill">
+          <h3>Support et mise à disposition de services</h3>
+          <ul>
+            <li>Résolution d'incidents matériels et logiciels<code>alternance</code></li>
+            <li>Déploiement de postes et téléphones (master)<code>alternance</code></li>
+            <li>Gestion de tickets à distance<code>alternance</code></li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Administration des systèmes et réseaux</h3>
+          <ul>
+            <li>Adressage IP, DHCP, imprimantes<code>alternance</code></li>
+            <li>Supervision CheckMK, déploiement WAPT<code>alternance</code></li>
+            <li>Linux Ubuntu et scripts Bash<code>cours</code></li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Cybersécurité</h3>
+          <ul>
+            <li>Déploiement MFA avec clés YubiKey<code>alternance</code></li>
+            <li>Mises à jour de sécurité Windows<code>alternance</code></li>
+            <li>Bonnes pratiques ANSSI et RGPD<code>certifié</code></li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Développement</h3>
+          <ul>
+            <li>Applications Windows en C# / .NET<code>PerfLens</code></li>
+            <li>API et IA locale en Python<code>Léo</code></li>
+            <li>Sites web HTML, CSS, JavaScript<code>projets web</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tools">
+        <p class="eyebrow">Outils et technologies</p>
+        <ul class="chips">
+          <li>Windows 10/11</li><li>Ubuntu</li><li>Bash</li><li>TCP/IP</li><li>DHCP</li><li>CheckMK</li><li>WAPT</li><li>YubiKey</li><li>C#</li><li>.NET</li><li>Python</li><li>FastAPI</li><li>Ollama</li><li>HTML/CSS</li><li>JavaScript</li><li>Git / GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block page" id="parcours" data-title="Parcours">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Parcours</p>
+        <h2 class="sec-title">Du commerce à l'infrastructure</h2>
+      </div>
+      <div class="path">
+        <div>
+          <ol class="timeline">
+            <li>
+              <span class="when">Diplôme obtenu</span>
+              <h3>Bac Pro Commerce, mention assez bien</h3>
+              <p>Lycée Blanche de Castille, Fontainebleau. Une première formation tournée vers le client, qui me sert aujourd'hui face aux utilisateurs.</p>
+            </li>
+            <li class="now">
+              <span class="when">En cours</span>
+              <h3>BTS SIO option SISR, en alternance</h3>
+              <p>CFA UTEC de Melun, en alternance au service informatique de l'Agglomération Melun Val de Seine.</p>
+            </li>
+            <li class="next">
+              <span class="when">Objectif</span>
+              <h3>Poursuite jusqu'au Bac+5</h3>
+              <p>Un Master en alternance pour me spécialiser dans les systèmes, les réseaux et la cybersécurité.</p>
+            </li>
+          </ol>
+          <div class="why">
+            <b>Pourquoi l'informatique ?</b>
+            Tout a commencé il y a environ cinq ans, avec mon premier PC reçu à Noël. Depuis, le matériel me passionne : comprendre chaque composant, monter des configurations et trouver ce qui ralentit une machine.
+          </div>
+        </div>
+        <div class="certs">
+          <p class="eyebrow">Certifications et formations</p>
+          <div class="cert"><div class="cert-mark">ANSSI</div><div><b>SecNumAcadémie</b><span>Cybersécurité et bonnes pratiques</span></div></div>
+          <div class="cert"><div class="cert-mark">PIX</div><div><b>Certification PIX</b><span>Compétences numériques certifiées par l'État</span></div></div>
+          <div class="cert"><div class="cert-mark">RGPD</div><div><b>Formation RGPD</b><span>Protection des données personnelles</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block page" id="contact" data-title="Contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Travaillons ensemble</h2>
+          <p>Une question, une offre d'alternance ou un projet ? Écrivez-moi, je réponds rapidement.</p>
+        </div>
+        <ul class="lines">
+          <li><span class="k">E-mail</span><span class="v" id="c-mail">torres.tom@orange.fr</span><button class="copy" type="button" data-copy="c-mail">Copier</button></li>
+          <li><span class="k">Téléphone</span><span class="v" id="c-tel">06 79 56 32 26</span><button class="copy" type="button" data-copy="c-tel">Copier</button></li>
+          <li><span class="k">GitHub</span><a class="v" href="https://github.com/Wertors" target="_blank" rel="noopener">github.com/Wertors</a><span></span></li>
+          <li><span class="k">CV</span><a class="v" href="https://www.canva.com/design/DAFb55bWnHo/UN3xWqMpBT8k5Qi75quQFg/edit" target="_blank" rel="noopener">Voir mon CV ↗</a><span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Tom Torres</span>
+    <span class="mono">BTS SIO · SISR · Melun</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Pages : une seule section visible à la fois, choisie par l'ancre (#projets, #contact…)
+    var nav = document.getElementById('nav');
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+    var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+    var ids = pages.map(function (p) { return p.id; });
+
+    // Lien « page précédente / suivante » en bas de chaque page
+    pages.forEach(function (p, i) {
+      if (i === 0) return;
+      var prev = pages[i - 1], next = pages[i + 1];
+      var pager = document.createElement('nav');
+      pager.className = 'pager';
+      pager.setAttribute('aria-label', 'Pages voisines');
+      pager.innerHTML =
+        '<a href="#' + prev.id + '"><small>← Précédent</small><b>' + prev.dataset.title + '</b></a>' +
+        (next ? '<a href="#' + next.id + '"><small>Suivant →</small><b>' + next.dataset.title + '</b></a>' : '');
+      p.querySelector('.wrap').appendChild(pager);
+    });
+
+    function show() {
+      var id = location.hash.replace('#', '');
+      if (ids.indexOf(id) === -1) id = 'accueil';
+      pages.forEach(function (p) { p.hidden = p.id !== id; });
+      links.forEach(function (l) {
+        var on = l.getAttribute('href') === '#' + id;
+        l.classList.toggle('is-active', on);
+        if (on) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current');
+      });
+      var cur = pages[ids.indexOf(id)];
+      document.title = id === 'accueil' ? 'Tom Torres Portfolio' : cur.dataset.title + ' · Tom Torres';
+      // Le navigateur saute à l'ancre : on revient en haut de la page affichée
+      var top = function () { window.scrollTo({ top: 0, behavior: 'instant' }); };
+      top(); setTimeout(top, 0);
+    }
+    window.addEventListener('hashchange', show);
+    show();
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('load', function () { setTimeout(function () { window.scrollTo({ top: 0, behavior: 'instant' }); }, 0); });
+
+    // Filtre des projets
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.proj'));
+    var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+    filters.forEach(function (f) {
+      var key = f.dataset.filter;
+      var n = key === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat.split(' ').indexOf(key) !== -1; }).length;
+      f.querySelector('.n').textContent = n;
+      f.addEventListener('click', function () {
+        filters.forEach(function (o) { o.setAttribute('aria-pressed', o === f ? 'true' : 'false'); });
+        cards.forEach(function (c) { c.hidden = key !== 'all' && c.dataset.cat.split(' ').indexOf(key) === -1; });
+      });
+    });
+
+    // Copier e-mail / téléphone
+    document.querySelectorAll('.copy').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById(b.dataset.copy);
+        var text = el.textContent.trim();
+        var done = function () { b.textContent = 'Copié'; setTimeout(function () { b.textContent = 'Copier'; }, 1600); };
+        var fallback = function () {
+          var r = document.createRange(); r.selectNodeContents(el);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          b.textContent = 'Sélectionné';
+          setTimeout(function () { b.textContent = 'Copier'; }, 1600);
+        };
+        try {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } catch (e) { fallback(); }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

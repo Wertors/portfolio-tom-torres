@@ -975,6 +975,102 @@
   <script type="application/json" id="veille-data">
 [
   {
+    "date": "2026-10-16",
+    "theme": "cyber",
+    "source": "IT-Connect",
+    "title": "PwnEscape : une faille Linux permet de s'évader d'une VM KVM",
+    "url": "https://www.it-connect.fr/pwnescape-cve-2026-99999-faille-noyau-linux-evasion-vm/",
+    "note": "Une VM peut faire fuir la mémoire de l'hôte ou le faire planter à cause d'une faille du noyau Linux (CVSS 9,3). L'isolation des VM n'est pas absolue : c'est le noyau de l'hôte qu'il faut mettre à jour en priorité."
+  },
+  {
+    "date": "2026-10-13",
+    "theme": "ia",
+    "source": "IT-Connect",
+    "title": "CyberXero : ce pirate a utilisé 51 agents Claude Code pour attaquer WordPress et l'Ukraine",
+    "url": "https://www.it-connect.fr/cyberxero-claude-code-wordpress-energie-ukraine/",
+    "note": "En se faisant passer pour un pentesteur autorisé, un pirate a piloté jusqu'à 51 agents IA pour compromettre des centaines de sites WordPress et Magento. L'IA accélère les attaques : il faut corriger les failles exposées encore plus vite."
+  },
+  {
+    "date": "2026-10-12",
+    "theme": "cyber",
+    "source": "CERT-FR",
+    "title": "CERTFR-2026-ALE-012 : Incident de sécurité ciblant les contrôleurs à distance des installations de réfrigération",
+    "url": "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2026-ALE-012/",
+    "note": "Des contrôleurs de réfrigération Danfoss, Copeland et Dixell exposés sur Internet ont été piratés. Le CERT-FR rappelle qu'une interface d'administration ne doit jamais être exposée directement : accès uniquement par VPN, et firmware à jour."
+  },
+  {
+    "date": "2026-10-08",
+    "theme": "cyber",
+    "source": "IT-Connect",
+    "title": "Outlook va bloquer les pièces jointes MSIX et MSIXBundle à partir de novembre 2026",
+    "url": "https://www.it-connect.fr/outlook-bloque-pieces-jointes-msix-msixbundle/",
+    "note": "Les paquets d'installation MSIX ont déjà servi à diffuser des malwares, jusqu'au ransomware Black Basta. Microsoft les bloque par défaut dans Outlook, et un admin peut les réautoriser dans les stratégies OWA si besoin."
+  },
+  {
+    "date": "2026-10-06",
+    "theme": "admin",
+    "source": "IT-Connect",
+    "title": "Debian 13 : cette mise à jour du noyau Linux corrige plus de 1 300 failles de sécurité",
+    "url": "https://www.it-connect.fr/debian-13-noyau-linux-1300-failles-corrigees/",
+    "note": "Le bulletin DSA-6528-1 corrige plus de 1 300 CVE dans le noyau de Debian 13. Un apt full-upgrade ne suffit pas : il faut redémarrer la machine pour charger le nouveau noyau, puis le vérifier avec uname."
+  },
+  {
+    "date": "2026-10-06",
+    "theme": "ia",
+    "source": "ActuIA",
+    "title": "Mistral Large 4 : ce que vaut le « meilleur modèle ouvert hors Chine »",
+    "url": "https://www.actuia.com/actualite/mistral-large-4-ce-que-vaut-le-meilleur-modele-ouvert-hors-chine/",
+    "note": "Le nouveau grand modèle du français Mistral AI reste derrière les meilleurs modèles chinois et en retrait en code, mais se classe bien en cybersécurité. Sa licence et ses poids ne sont pas encore publiés, donc les résultats restent provisoires."
+  },
+  {
+    "date": "2026-10-02",
+    "theme": "admin",
+    "source": "IT-Connect",
+    "title": "GLPI 11.0.11 et GLPI 10.0.28 : 8 failles patchées et la fin annoncée de GLPI 10",
+    "url": "https://www.it-connect.fr/glpi-11-0-10-10-0-28-failles-fin-glpi-10/",
+    "note": "GLPI est un outil de gestion de parc et de tickets très répandu dans les services informatiques. Il faut le maintenir à jour et anticiper la migration vers GLPI 11."
+  },
+  {
+    "date": "2026-10-01",
+    "theme": "cyber",
+    "source": "IT-Connect",
+    "title": "Faille Metabase : l'ANSSI et la DINUM victimes d'une fuite de données",
+    "url": "https://www.it-connect.fr/anssi-dinum-fuite-donnees-metabase/",
+    "note": "Même les administrations les mieux armées sont touchées quand un logiciel n'est pas corrigé à temps. Le CERT-FR avait publié une alerte sur Metabase dès le 10 septembre."
+  },
+  {
+    "date": "2026-10-01",
+    "theme": "admin",
+    "source": "IT-Connect",
+    "title": "Windows 11 26H2 à peine sorti, Microsoft liste déjà 3 bugs",
+    "url": "https://www.it-connect.fr/windows-11-26h2-problemes-connus/",
+    "note": "Une nouvelle version majeure arrive souvent avec des problèmes connus. Mieux vaut la tester sur quelques postes avant de la déployer sur tout le parc."
+  },
+  {
+    "date": "2026-10-01",
+    "theme": "ia",
+    "source": "ActuIA",
+    "title": "Cloudflare détaille comment une IA a tenté 1 107 fois de passer son pare-feu",
+    "url": "https://www.actuia.com/actualite/cloudflare-detaille-comment-une-ia-a-tente-1-107-fois-de-passer-son-pare-feu/",
+    "note": "L'IA sert aussi à attaquer : les protections doivent désormais résister à des tentatives automatisées et répétées à grande échelle."
+  },
+  {
+    "date": "2026-09-25",
+    "theme": "ia",
+    "source": "IT-Connect",
+    "title": "Un agent IA d'OpenAI a piraté un portail du gouvernement australien",
+    "url": "https://www.it-connect.fr/openai-agent-ia-portail-medicare-australie/",
+    "note": "Un agent IA autonome peut causer de vrais dégâts. Il faut limiter ses droits et surveiller ce qu'il fait, comme pour n'importe quel compte à privilèges."
+  },
+  {
+    "date": "2026-09-24",
+    "theme": "admin",
+    "source": "IT-Connect",
+    "title": "Windows 11 : les mises à jour de septembre 2026 cassent le VPN Always On",
+    "url": "https://www.it-connect.fr/windows-11-mises-a-jour-septembre-2026-always-on-vpn/",
+    "note": "Encore une mise à jour qui casse une fonction utilisée en entreprise. Tester les correctifs avant de les généraliser évite de couper l'accès à distance des utilisateurs."
+  },
+  {
     "date": "2026-09-22",
     "theme": "cyber",
     "source": "IT-Connect",
@@ -997,54 +1093,6 @@
     "title": "Sept modèles ont dirigé de vraies entreprises pendant 72 heures : 12 431 dollars de factures indues, zéro revenu",
     "url": "https://www.actuia.com/actualite/sept-modeles-de-pointe-ont-dirige-de-vraies-entreprises-pendant-72-heures-12-431-dollars-de-factures-indues-zero-revenu/",
     "note": "Une expérience qui montre les limites des agents IA laissés en autonomie. Ils peuvent aider, mais une validation humaine reste nécessaire avant toute action qui engage l'entreprise."
-  },
-  {
-    "date": "2026-10-01",
-    "theme": "cyber",
-    "source": "IT-Connect",
-    "title": "Faille Metabase : l'ANSSI et la DINUM victimes d'une fuite de données",
-    "url": "https://www.it-connect.fr/anssi-dinum-fuite-donnees-metabase/",
-    "note": "Même les administrations les mieux armées sont touchées quand un logiciel n'est pas corrigé à temps. Le CERT-FR avait publié une alerte sur Metabase dès le 10 septembre."
-  },
-  {
-    "date": "2026-10-02",
-    "theme": "admin",
-    "source": "IT-Connect",
-    "title": "GLPI 11.0.11 et GLPI 10.0.28 : 8 failles patchées et la fin annoncée de GLPI 10",
-    "url": "https://www.it-connect.fr/glpi-11-0-10-10-0-28-failles-fin-glpi-10/",
-    "note": "GLPI est un outil de gestion de parc et de tickets très répandu dans les services informatiques. Il faut le maintenir à jour et anticiper la migration vers GLPI 11."
-  },
-  {
-    "date": "2026-10-01",
-    "theme": "admin",
-    "source": "IT-Connect",
-    "title": "Windows 11 26H2 à peine sorti, Microsoft liste déjà 3 bugs",
-    "url": "https://www.it-connect.fr/windows-11-26h2-problemes-connus/",
-    "note": "Une nouvelle version majeure arrive souvent avec des problèmes connus. Mieux vaut la tester sur quelques postes avant de la déployer sur tout le parc."
-  },
-  {
-    "date": "2026-10-01",
-    "theme": "ia",
-    "source": "ActuIA",
-    "title": "Cloudflare détaille comment une IA a tenté 1 107 fois de passer son pare-feu",
-    "url": "https://www.actuia.com/actualite/cloudflare-detaille-comment-une-ia-a-tente-1-107-fois-de-passer-son-pare-feu/",
-    "note": "L'IA sert aussi à attaquer : les protections doivent désormais résister à des tentatives automatisées et répétées à grande échelle."
-  },
-  {
-    "date": "2026-09-24",
-    "theme": "admin",
-    "source": "IT-Connect",
-    "title": "Windows 11 : les mises à jour de septembre 2026 cassent le VPN Always On",
-    "url": "https://www.it-connect.fr/windows-11-mises-a-jour-septembre-2026-always-on-vpn/",
-    "note": "Encore une mise à jour qui casse une fonction utilisée en entreprise. Tester les correctifs avant de les généraliser évite de couper l'accès à distance des utilisateurs."
-  },
-  {
-    "date": "2026-09-25",
-    "theme": "ia",
-    "source": "IT-Connect",
-    "title": "Un agent IA d'OpenAI a piraté un portail du gouvernement australien",
-    "url": "https://www.it-connect.fr/openai-agent-ia-portail-medicare-australie/",
-    "note": "Un agent IA autonome peut causer de vrais dégâts. Il faut limiter ses droits et surveiller ce qu'il fait, comme pour n'importe quel compte à privilèges."
   }
 ]
   </script>

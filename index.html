@@ -977,6 +977,86 @@
   <script type="application/json" id="veille-data">
 [
   {
+    "date": "2026-11-20",
+    "theme": "cyber",
+    "source": "IT-Connect",
+    "title": "FastUnlock : une faille zero-day Windows 11 contourne l'écran de verrouillage et menace BitLocker",
+    "url": "https://www.it-connect.fr/fastunlock-zero-day-windows-11-bitlocker-narrateur/",
+    "note": "Avec un accès physique, le Narrateur de l'écran de verrouillage permet de lancer un programme depuis une clé USB. Pas encore de correctif : BitLocker seul ne suffit pas, la sécurité physique des postes compte aussi."
+  },
+  {
+    "date": "2026-11-19",
+    "theme": "admin",
+    "source": "IT-Connect",
+    "title": "Mots de passe Active Directory : un attaquant les casse, un outil gratuit les repère avant lui",
+    "url": "https://www.it-connect.fr/specops-password-auditor-audit-active-directory/",
+    "note": "Un outil gratuit en lecture seule repère dans l'AD les mots de passe compromis, identiques ou vides. Un bon réflexe d'admin : auditer régulièrement et faire changer en priorité les mots de passe des comptes à privilèges."
+  },
+  {
+    "date": "2026-11-18",
+    "theme": "cyber",
+    "source": "CERT-FR",
+    "title": "CERTFR-2026-ALE-017 : Multiples vulnérabilités dans F5 NGINX",
+    "url": "https://cert.cyber.gouv.fr/alerte/CERTFR-2026-ALE-017/",
+    "note": "Deux failles critiques de NGINX permettent d'exécuter du code à distance via HTTP/2, et une preuve de concept est publique. Il faut appliquer les correctifs de F5 ou désactiver HTTP/2 en attendant."
+  },
+  {
+    "date": "2026-11-18",
+    "theme": "ia",
+    "source": "IT-Connect",
+    "title": "Microsoft Perception : les agents IA spécialisés dans la cybersécurité sont disponibles !",
+    "url": "https://www.it-connect.fr/microsoft-perception-disponibilite-generale-ignite/",
+    "note": "Microsoft intègre à Defender des agents IA qui trient les alertes, enquêtent et proposent des corrections. L'IA devient un assistant du SOC, mais Microsoft garde une validation humaine avant toute action."
+  },
+  {
+    "date": "2026-11-10",
+    "theme": "ia",
+    "source": "IT-Connect",
+    "title": "Claude Fable 5.2 a codé un système d'exploitation en 8 jours avec plus de 1 000 sous-agents",
+    "url": "https://www.it-connect.fr/claude-fable-5-2-systeme-exploitation-1000-sous-agents/",
+    "note": "Plus de 1 000 agents IA coordonnés ont produit en huit jours un prototype de système d'exploitation qui démarre sur un portable. Ce n'est pas un produit, mais ça montre jusqu'où vont les agents IA qui travaillent ensemble."
+  },
+  {
+    "date": "2026-11-09",
+    "theme": "cyber",
+    "source": "IT-Connect",
+    "title": "SonicWall : une faille dans le VPN SSL permet de contourner le MFA et elle est exploitée",
+    "url": "https://www.it-connect.fr/sonicwall-vpn-ssl-faille-saml-mfa-cve-2026-19868/",
+    "note": "Quand SAML est activé sur le VPN SSL, la faille CVE-2026-19868 permet de contourner le MFA, et elle est déjà exploitée. Aucun contournement n'existe : il faut mettre à jour SonicOS au plus vite."
+  },
+  {
+    "date": "2026-11-06",
+    "theme": "cyber",
+    "source": "IT-Connect",
+    "title": "Faux événements OpenAI, SpaceX et Anthropic : ce phishing vole les comptes Microsoft et Google",
+    "url": "https://www.it-connect.fr/faux-evenements-openai-spacex-phishing-microsoft-google/",
+    "note": "De fausses inscriptions à des événements poussent les salariés à se connecter avec leur compte pro, qui est volé même avec le MFA. Parade conseillée : bloquer la connexion par code d'appareil avec l'accès conditionnel."
+  },
+  {
+    "date": "2026-11-06",
+    "theme": "ia",
+    "source": "IT-Connect",
+    "title": "OpenAI lance GPT-6 Cyber : son modèle IA taillé pour trouver et exploiter des failles",
+    "url": "https://www.it-connect.fr/openai-gpt-6-cyber-exploits-linux-firefox-daybreak-red/",
+    "note": "Réservé à quelques clients, ce modèle aurait produit des centaines d'exploits pour le noyau Linux et Firefox selon OpenAI. Il faut s'attendre à un flot de correctifs à appliquer dans les semaines qui suivent."
+  },
+  {
+    "date": "2026-11-05",
+    "theme": "cyber",
+    "source": "CERT-FR",
+    "title": "CERTFR-2026-ALE-015 : Vulnérabilité dans OpenSSH",
+    "url": "https://cert.cyber.gouv.fr/alerte/CERTFR-2026-ALE-015/",
+    "note": "La faille CVE-2026-123158 permet de contourner l'authentification par mot de passe d'OpenSSH sur certains Linux basés sur musl, sans PAM. Correctif : OpenSSH 10.6p2 puis redémarrage de sshd, ou à défaut désactiver la connexion par mot de passe."
+  },
+  {
+    "date": "2026-11-05",
+    "theme": "admin",
+    "source": "IT-Connect",
+    "title": "Linux : une faille dans APT permet de remplacer un paquet vérifié et de l'exécuter en root",
+    "url": "https://www.it-connect.fr/faille-apt-cve-2026-109518-debian-ubuntu-root/",
+    "note": "Sur Debian et Ubuntu, un proxy ou un miroir malveillant pouvait remplacer un paquet déjà vérifié pendant une installation et obtenir les droits root. Il faut mettre APT à jour et privilégier des miroirs en HTTPS."
+  },
+  {
     "date": "2026-10-30",
     "theme": "ia",
     "source": "IT-Connect",
